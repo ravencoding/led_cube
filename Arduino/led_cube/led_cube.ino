@@ -3,7 +3,7 @@
 const int anode_pins[] = {2,3,4,5,6,7,8,9,10};
 const int base_pin = 11;
 const int cathode_pin = 12;
-static int id = 0;
+static int filter_id = 0;
 
 const int digits[] = {
   0b000000001, //0
@@ -52,7 +52,7 @@ void display_number(int n){
 }
 
 void display_led(){
-  display_number(id);
+  display_number(filter_id);
 }
 
 void setup() {
@@ -72,10 +72,8 @@ void setup() {
 }
 
 void loop() {
-  for(int i=0; i<sizeof(digits);i++){
-    id++;
-    delay(500);
-  }
+  filter_id = (int)getFilterIdBySerial();
+  delay(500);
 }
 
 int getFilterIdBySerial(){
