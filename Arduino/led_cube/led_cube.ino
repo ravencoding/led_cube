@@ -72,14 +72,15 @@ void setup() {
 }
 
 void loop() {
-  filter_id = (int)getFilterIdBySerial();
+  //filter_id=0;
   delay(500);
 }
 
-int getFilterIdBySerial(){
-  if(Serial.available()){
-    return (int)Serial.read();
+void serialEvent(){
+  if(Serial.available()>0){
+    filter_id = (int)Serial.read();
+  }else{
+    filter_id = 0;
   }
-  return 0;
 }
 
