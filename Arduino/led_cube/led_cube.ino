@@ -57,7 +57,6 @@ void display_led(){
 
 void setup() {
   Serial.begin(9600);
-  
   for(int i=0; i < sizeof(anode_pins); i++){
     pinMode(anode_pins[i], OUTPUT);
   }
@@ -72,13 +71,14 @@ void setup() {
 }
 
 void loop() {
-  //filter_id=0;
-  delay(500);
 }
 
 void serialEvent(){
   if(Serial.available()>0){
-    filter_id = (int)Serial.read();
+    //Serial.read() get 1byte as integer. And integer to char.
+    char tmp = Serial.read();
+    Serial.println(tmp);//for print debugging on Unity console.
+    filter_id = tmp - '0';//this technique is char to int.
   }else{
     filter_id = 0;
   }
